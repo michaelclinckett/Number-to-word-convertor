@@ -39,3 +39,16 @@ _Tens = {
 }
 
 error =("not supporting yet")
+
+#__________MAIN___________#
+
+num = int(input("Type a number here:\n"))    #This should print the code and lead the user to type in a number
+if num < 20:
+  print(_Ones[num], "dollars")    #This should able to convert number with in 1-19
+else:
+  print("Not support yet")            
+
+
+
+
+
