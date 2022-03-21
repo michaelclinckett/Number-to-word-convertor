@@ -42,7 +42,6 @@ error =("not supporting yet")
 
 #__________Function___________#
 def convert(num):
-  num = int(input("Type a number here:\n"))    #This should print the code and lead   the user to type in a number
   if num < 20:                      #validate if number fit requirement for   dictionary 1
     print(_Ones[num], "dollars")    #This should able to convert number with in 1-19
   elif num < 100:
@@ -61,5 +60,6 @@ def convert(num):
   
 
 #______MAIN_______#
-convert(int(input("Type a number here:\n")))
+    
+convert(int(input("Type a number here:\n")))    #This should print the code and lead   the user to type in a number
 
