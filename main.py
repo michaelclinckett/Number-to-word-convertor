@@ -61,8 +61,23 @@ def convert(num):
   else:
     print("Not support yet")
   
+  
+def validation():
+  num_input = input("Please put in amount that you would like to convert:\n")    #This should print the code and lead   the user to type in a number
+  try:
+    is_num = float(num_input)
+    
+  except ValueError:
+    print("NOT number")
+    validation()
+    return
+
+  if is_num > -1:
+    convert(is_num)
+  else:  
+    print("Please enter a positive number to convert")
 
 #______MAIN_______#
-    
-convert(int(input("Type a number here:\n")))    #This should print the code and lead   the user to type in a number
+validation()
+
 
