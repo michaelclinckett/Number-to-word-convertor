@@ -43,7 +43,10 @@ error =("not supporting yet")
 #__________Function___________#
 def convert(num):
   if num < 20:                      #validate if number fit requirement for   dictionary 1
-    print(_Ones[num], "dollars")    #This should able to convert number with in 1-19
+    if num == 1:
+      print(_Ones[num], "dollar")    #Print one dollar
+    else: 
+      print(_Ones[num], "dollars")    #This should able to convert number with in 1-19
   elif num < 100:
     tens, ones = [(num//(10**i))%10 for i in range(math.ceil(math.log(num, 10))-1,  -1, -1)]
      #Program from https://www.delftstack.com/howto/python/split-integer-into-digits-python/
