@@ -44,9 +44,9 @@ error =("not supporting yet")
 def convert(num):
   if num < 20:                      #validate if number fit requirement for   dictionary 1
     if num == 1:
-      print(_Ones[num], "dollar")    #Print one dollar
+      print(_Ones[num].capitalize(), "dollar")    #Print one dollar
     else: 
-      print(_Ones[num], "dollars")    #This should able to convert number with in 1-19
+      print(_Ones[num].capitalize(), "dollars")    #This should able to convert number with in 1-19
   elif num < 100:
     tens, ones = [(num//(10**i))%10 for i in range(math.ceil(math.log(num, 10))-1,  -1, -1)]
      #Program from https://www.delftstack.com/howto/python/split-integer-into-digits-python/
@@ -55,9 +55,9 @@ def convert(num):
     if ones != 0:
       one_in_words = _Ones[ones]  #From dictionary find ones
     
-      print(ten_in_words, one_in_words, "dollars")  #prints the dollar amount
+      print(ten_in_words.capitalize(), one_in_words, "dollars")  #prints the dollar amount
     else:
-      print(ten_in_words, "dollars")
+      print(ten_in_words.capitalize(), "dollars")
   else:
     print("Not support yet")
   
