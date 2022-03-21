@@ -1,6 +1,7 @@
 #______________________imports___________________#
 import math
-
+import colorama
+from colorama import Fore
 #_____________DEFINE___________#
 
 
@@ -68,9 +69,9 @@ def validation():
     is_num = float(num_input)
     
   except ValueError:
-    print("NOT number")
+    print(Fore.RED +"Please put in a VALID number")
+    print(Fore.WHITE)
     validation()
-    return
 
   if is_num > -1:
     convert(is_num)
