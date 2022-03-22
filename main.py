@@ -42,7 +42,8 @@ _Tens = {
 error =("not supporting yet")
 
 #__________Function___________#
-def convert(num):
+def convert(raw_num):
+  num = round(float(raw_num), 2)
   if num.is_integer() == True:
     if num < 20:                      #validate if number fit requirement for   dictionary 1
       if num == 1:
@@ -64,12 +65,13 @@ def convert(num):
       else:
         print(ten_in_words.capitalize(), "dollars")
         validation()
-    else:
+    else:    #number greater than 100
       print(Fore.RED +"Not support yet"+Fore.WHITE)
       validation()
-  else:                      #d
-    print(Fore.RED +"Not support deciaml"+Fore.WHITE)
-    validation()
+  else:                      #decimal number loop
+    cents, dollars = math.modf(num)
+    print("Cents:", round(cents, 2))
+    print("Dollars:", dollars)
   
   
 def validation():
