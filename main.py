@@ -77,6 +77,7 @@ def convert(raw_num):
     cents, dollars = math.modf(num)
     print("Cents:", round(cents, 2))
     print("Dollars:", dollars)
+    two_d_convert(dollars)
     
   
   
