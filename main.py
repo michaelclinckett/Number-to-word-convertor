@@ -42,14 +42,40 @@ _Tens = {
 error =("not supporting yet")
 
 #__________Function___________#
+def cents_convert(cent):
+  if cent < 20:                      #validate if number fit requirement for   dictionary 1
+      if cent == 1:
+        print(_Ones[cent].capitalize(), "cent")    #Print one dollar
+        validation()
+      else: 
+        print(_Ones[cent].capitalize(), "cents")    #This should able to convert number with in 1-19
+        validation()
+  elif cent < 100:
+      ten_cents, single_cents = [(cent//(10**i))%10 for i in range(math.ceil(math.log(cent, 10))-1,  -1, -1)]
+     #Program from https://www.delftstack.com/howto/python/split-integer-into-digits-python/
+      ten_cents_in_words = _Tens[ten_cents]  #From dictionary find tens
+
+      if single_cents != 0:
+        single_cents_in_words = _Ones[single_cents]  #From dictionary find single_cents
+    
+        print(ten_cents_in_words.capitalize(), single_cents_in_words, "cents")  #prints the dollar amount
+        validation()
+      else:
+        print(ten_cents_in_words.capitalize(), "cents")
+        validation()
+  else:    #number greater than 100
+      print(Fore.RED +"Not support yet"+Fore.WHITE)
+      validation()
+
+
 def two_d_convert(num):
   if num < 20:                      #validate if number fit requirement for   dictionary 1
       if num == 1:
         print(_Ones[num].capitalize(), "dollar")    #Print one dollar
-        validation()
+        
       else: 
         print(_Ones[num].capitalize(), "dollars")    #This should able to convert number with in 1-19
-        validation()
+        
   elif num < 100:
       tens, ones = [(num//(10**i))%10 for i in range(math.ceil(math.log(num, 10))-1,  -1, -1)]
      #Program from https://www.delftstack.com/howto/python/split-integer-into-digits-python/
@@ -59,13 +85,13 @@ def two_d_convert(num):
         one_in_words = _Ones[ones]  #From dictionary find ones
     
         print(ten_in_words.capitalize(), one_in_words, "dollars")  #prints the dollar amount
-        validation()
+        
       else:
         print(ten_in_words.capitalize(), "dollars")
-        validation()
+        
   else:    #number greater than 100
       print(Fore.RED +"Not support yet"+Fore.WHITE)
-      validation()
+      
 
 
 
@@ -78,6 +104,7 @@ def convert(raw_num):
     print("Cents:", round(cents, 2))
     print("Dollars:", dollars)
     two_d_convert(dollars)
+    cents_convert(round(cents, 2)*100)
     
   
   
