@@ -65,10 +65,9 @@ def convert(num):
         print(ten_in_words.capitalize(), "dollars")
         validation()
     else:
-      print(Fore.RED +"Not support yet")
-      print(Fore.WHITE)
+      print(Fore.RED +"Not support yet"+Fore.WHITE)
       validation()
-  else:
+  else:                      #d
     print(Fore.RED +"Not support deciaml"+Fore.WHITE)
     validation()
   
@@ -79,15 +78,13 @@ def validation():
     is_num = float(num_input)
     
   except ValueError:
-    print(Fore.RED +"Please put in a VALID number")
-    print(Fore.WHITE)
+    print(Fore.RED +"Please put in a VALID number"+Fore.WHITE)
     validation()
 
   if is_num > -1:
     convert(is_num)
   else:  
-    print(Fore.RED +"Please enter a positive number to convert")
-    print(Fore.WHITE)
+    print(Fore.RED +"Please enter a positive number to convert"+Fore.WHITE)
     validation()
 
 #______MAIN_______#
