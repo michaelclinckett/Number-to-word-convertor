@@ -42,17 +42,15 @@ _Tens = {
 error =("not supporting yet")
 
 #__________Function___________#
-def convert(raw_num):
-  num = round(float(raw_num), 2)
-  if num.is_integer() == True:
-    if num < 20:                      #validate if number fit requirement for   dictionary 1
+def two_d_convert(num):
+  if num < 20:                      #validate if number fit requirement for   dictionary 1
       if num == 1:
         print(_Ones[num].capitalize(), "dollar")    #Print one dollar
         validation()
       else: 
         print(_Ones[num].capitalize(), "dollars")    #This should able to convert number with in 1-19
         validation()
-    elif num < 100:
+  elif num < 100:
       tens, ones = [(num//(10**i))%10 for i in range(math.ceil(math.log(num, 10))-1,  -1, -1)]
      #Program from https://www.delftstack.com/howto/python/split-integer-into-digits-python/
       ten_in_words = _Tens[tens]  #From dictionary find tens
@@ -65,13 +63,21 @@ def convert(raw_num):
       else:
         print(ten_in_words.capitalize(), "dollars")
         validation()
-    else:    #number greater than 100
+  else:    #number greater than 100
       print(Fore.RED +"Not support yet"+Fore.WHITE)
       validation()
+
+
+
+def convert(raw_num):
+  num = round(float(raw_num), 2)
+  if num.is_integer() == True:
+    two_d_convert(num)
   else:                      #decimal number loop
     cents, dollars = math.modf(num)
     print("Cents:", round(cents, 2))
     print("Dollars:", dollars)
+    
   
   
 def validation():
