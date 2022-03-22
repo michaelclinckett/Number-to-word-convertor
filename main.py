@@ -43,29 +43,33 @@ error =("not supporting yet")
 
 #__________Function___________#
 def convert(num):
-  if num < 20:                      #validate if number fit requirement for   dictionary 1
-    if num == 1:
-      print(_Ones[num].capitalize(), "dollar")    #Print one dollar
-      validation()
-    else: 
-      print(_Ones[num].capitalize(), "dollars")    #This should able to convert number with in 1-19
-      validation()
-  elif num < 100:
-    tens, ones = [(num//(10**i))%10 for i in range(math.ceil(math.log(num, 10))-1,  -1, -1)]
+  if num.is_integer() == True:
+    if num < 20:                      #validate if number fit requirement for   dictionary 1
+      if num == 1:
+        print(_Ones[num].capitalize(), "dollar")    #Print one dollar
+        validation()
+      else: 
+        print(_Ones[num].capitalize(), "dollars")    #This should able to convert number with in 1-19
+        validation()
+    elif num < 100:
+      tens, ones = [(num//(10**i))%10 for i in range(math.ceil(math.log(num, 10))-1,  -1, -1)]
      #Program from https://www.delftstack.com/howto/python/split-integer-into-digits-python/
-    ten_in_words = _Tens[tens]  #From dictionary find tens
+      ten_in_words = _Tens[tens]  #From dictionary find tens
 
-    if ones != 0:
-      one_in_words = _Ones[ones]  #From dictionary find ones
+      if ones != 0:
+        one_in_words = _Ones[ones]  #From dictionary find ones
     
-      print(ten_in_words.capitalize(), one_in_words, "dollars")  #prints the dollar amount
-      validation()
+        print(ten_in_words.capitalize(), one_in_words, "dollars")  #prints the dollar amount
+        validation()
+      else:
+        print(ten_in_words.capitalize(), "dollars")
+        validation()
     else:
-      print(ten_in_words.capitalize(), "dollars")
+      print(Fore.RED +"Not support yet")
+      print(Fore.WHITE)
       validation()
   else:
-    print(Fore.RED +"Not support yet")
-    print(Fore.WHITE)
+    print(Fore.RED +"Not support deciaml"+Fore.WHITE)
     validation()
   
   
