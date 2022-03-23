@@ -107,7 +107,7 @@ def cents_convert(cent):
 def two_d_convert(num):
   global dollar
   if num < 20:                      #validate if number fit requirement for   dictionary 1
-      if num == 1:
+      if is_num == 1:
         dollar = " ".join((_Ones[num], "dollar"))    #Print one dollar
         
       else: 
@@ -134,10 +134,14 @@ def three_d_convert(num):
   if num < 1000:    #number greater than 100
     raw_hundred = int(num/100)
     raw_number = num - (raw_hundred*100)
-    two_d_convert(raw_number)
+    if raw_number != 0:
+      two_d_convert(raw_number)
+      hundred = (_Ones[raw_hundred], "hundred")
+      join_hundred = " ".join([" ".join(hundred),"and", dollar])
+    else:
+      hundred = (_Ones[raw_hundred], "hundred")
+      join_hundred =" ".join(hundred)
     
-    hundred = (_Ones[raw_hundred], "hundred")
-    join_hundred = " ".join([" ".join(hundred),"and", dollar])
 
 
 def convert(raw_num):
@@ -164,6 +168,7 @@ def convert(raw_num):
   
   
 def validation():
+  global is_num
   num_input = input("\nPlease put in amount that you would like to convert:\n$")    #This should print the code and lead   the user to type in a number
   try:
     is_num = float(num_input)
