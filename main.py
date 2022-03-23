@@ -147,7 +147,7 @@ def three_d_convert(num):
 def convert(raw_num):
   num = round(float(raw_num), 2)
   if num.is_integer() == True:
-    if num < 100:
+    if num < 100:    #checking to use 2_digit or 3_digit convert
       two_d_convert(num)
       print(dollar.capitalize())
       validation()
@@ -155,15 +155,21 @@ def convert(raw_num):
       three_d_convert(num)
       print(join_hundred.capitalize())
       validation()
-    else:
+    else:      #larger than 1000 input
       print(Fore.RED +"Not support yet"+Fore.WHITE.capitalize())
       validation()
       
   else:                      #decimal number loop
     raw_cents, raw_dollars = math.modf(num)
-    two_d_convert(raw_dollars), cents_convert(round(raw_cents*100, 0))
-    print(" ".join(dollar),"and", " ".join(cents))
-    validation()
+    if num < 100:
+      two_d_convert(raw_dollars), cents_convert(round(raw_cents*100, 0))
+      print((dollar.capitalize()),"and", " ".join(cents))
+      validation()
+    
+    
+    else:
+      print((Fore.RED +"Not support yet"+Fore.WHITE).capitalize())
+      validation()
     
   
   
