@@ -165,7 +165,11 @@ def convert(raw_num):
       two_d_convert(raw_dollars), cents_convert(round(raw_cents*100, 0))
       print((dollar.capitalize()),"and", " ".join(cents))
       validation()
-    
+
+    elif num < 1000:
+      three_d_convert(raw_dollars), cents_convert(round(raw_cents*100, 0))
+      print((join_hundred.capitalize()),"and", " ".join(cents))
+      validation()
     
     else:
       print((Fore.RED +"Not support yet"+Fore.WHITE).capitalize())
