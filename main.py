@@ -39,6 +39,45 @@ _Tens = {
     9: 'ninety'
 }
 
+_placeholders = {
+    0: 'thousand',
+    1: 'million',
+    2: 'billion',
+    3: 'trillion',
+    4: 'quadrillion',
+    5: 'quintillion',
+    6: 'hextillion',
+    7: 'septillion',
+    8: 'octillion',
+    9: 'nonillion',
+    10: 'decillion',
+    11: 'undecillion',
+    12: 'duodecillion',
+    13: 'tredecillion',
+    14: 'quattuordecillion',
+    15: 'quindecillion',
+    16: 'hexdecillion',
+    17: 'septendecillion',
+    18: 'octodecillion',
+    19: 'novemdecillion',
+    20: 'vigintillion',
+    21: 'unvigintillion',
+    22: 'duovigintillion',
+    23: 'trevigintillion',
+    24: 'quattourvigintillion',
+    25: 'quinvigintillion',
+    26: 'hexvigintillion',
+    27: 'septenvigintillion',
+    28: 'octovigintillion',
+    29: 'novemvigintillion',
+    30: 'trigintillion',
+    31: 'untrigintillion',
+    32: 'duotrigintillion',
+    33: 'googol',
+    34: 'googolplex'
+}
+
+
 error =("not supporting yet")
 
 #__________Function___________#
@@ -68,10 +107,10 @@ def two_d_convert(num):
   global dollar
   if num < 20:                      #validate if number fit requirement for   dictionary 1
       if num == 1:
-        dollar = (_Ones[num].capitalize(), "dollar")    #Print one dollar
+        dollar = " ".join((_Ones[num].capitalize(), "dollar"))    #Print one dollar
         
       else: 
-        dollar = (_Ones[num].capitalize(), "dollars")    #This should able to convert number with in 1-19
+        dollar = " ".join((_Ones[num].capitalize(), "dollars"))    #This should able to convert number with in 1-19
         
   elif num < 100:
       tens, ones = [(num//(10**i))%10 for i in range(math.ceil(math.log(num, 10))-1,  -1, -1)]
@@ -81,14 +120,18 @@ def two_d_convert(num):
       if ones != 0:
         one_in_words = _Ones[ones]  #From dictionary find ones
     
-        dollar = (ten_in_words.capitalize(), one_in_words, "dollars")  #prints the dollar amount
+        dollar = " ".join((ten_in_words.capitalize(), one_in_words, "dollars"))  #prints the dollar amount
         
       else:
-        dollar = (ten_in_words.capitalize(), "dollars")
+        dollar = " ".join((ten_in_words.capitalize(), "dollars"))
         
-  else:    #number greater than 100
-      dollar = (Fore.RED +"Not support yet"+Fore.WHITE)
-      
+  elif num < 1000:    #number greater than 100
+    raw_hundred = int(num/100)
+    raw_number = num - (raw_hundred*100)
+    hundred = (_Ones[raw_hundred], "hundred")
+    dollar = " ".join(hundred)
+  else:
+    dollar = " ".join((Fore.RED +"Not support yet"+Fore.WHITE))
 
 
 
@@ -96,6 +139,7 @@ def convert(raw_num):
   num = round(float(raw_num), 2)
   if num.is_integer() == True:
     two_d_convert(num)
+    print(dollar)
     validation()
   else:                      #decimal number loop
     raw_cents, raw_dollars = math.modf(num)
