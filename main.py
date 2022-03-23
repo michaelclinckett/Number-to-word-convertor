@@ -40,41 +40,42 @@ _Tens = {
 }
 
 _placeholders = {
-    0: 'thousand',
-    1: 'million',
-    2: 'billion',
-    3: 'trillion',
-    4: 'quadrillion',
-    5: 'quintillion',
-    6: 'hextillion',
-    7: 'septillion',
-    8: 'octillion',
-    9: 'nonillion',
-    10: 'decillion',
-    11: 'undecillion',
-    12: 'duodecillion',
-    13: 'tredecillion',
-    14: 'quattuordecillion',
-    15: 'quindecillion',
-    16: 'hexdecillion',
-    17: 'septendecillion',
-    18: 'octodecillion',
-    19: 'novemdecillion',
-    20: 'vigintillion',
-    21: 'unvigintillion',
-    22: 'duovigintillion',
-    23: 'trevigintillion',
-    24: 'quattourvigintillion',
-    25: 'quinvigintillion',
-    26: 'hexvigintillion',
-    27: 'septenvigintillion',
-    28: 'octovigintillion',
-    29: 'novemvigintillion',
-    30: 'trigintillion',
-    31: 'untrigintillion',
-    32: 'duotrigintillion',
-    33: 'googol',
-    34: 'googolplex'
+    0: ' ',
+    1: 'thousand',
+    2: 'million',
+    3: 'billion',
+    4: 'trillion',
+    5: 'quadrillion',
+    6: 'quintillion',
+    7: 'hextillion',
+    8: 'septillion',
+    9: 'octillion',
+    10: 'nonillion',
+    11: 'decillion',
+    12: 'undecillion',
+    13: 'duodecillion',
+    14: 'tredecillion',
+    15: 'quattuordecillion',
+    16: 'quindecillion',
+    17: 'hexdecillion',
+    18: 'septendecillion',
+    19: 'octodecillion',
+    20: 'novemdecillion',
+    21: 'vigintillion',
+    22: 'unvigintillion',
+    23: 'duovigintillion',
+    24: 'trevigintillion',
+    25: 'quattourvigintillion',
+    26: 'quinvigintillion',
+    27: 'hexvigintillion',
+    28: 'septenvigintillion',
+    29: 'octovigintillion',
+    30: 'novemvigintillion',
+    31: 'trigintillion',
+    32: 'untrigintillion',
+    33: 'duotrigintillion',
+    34: 'googol',
+    35: 'googolplex'
 }
 
 
@@ -107,10 +108,10 @@ def two_d_convert(num):
   global dollar
   if num < 20:                      #validate if number fit requirement for   dictionary 1
       if num == 1:
-        dollar = " ".join((_Ones[num].capitalize(), "dollar"))    #Print one dollar
+        dollar = " ".join((_Ones[num], "dollar"))    #Print one dollar
         
       else: 
-        dollar = " ".join((_Ones[num].capitalize(), "dollars"))    #This should able to convert number with in 1-19
+        dollar = " ".join((_Ones[num], "dollars"))    #This should able to convert number with in 1-19
         
   elif num < 100:
       tens, ones = [(num//(10**i))%10 for i in range(math.ceil(math.log(num, 10))-1,  -1, -1)]
@@ -120,27 +121,40 @@ def two_d_convert(num):
       if ones != 0:
         one_in_words = _Ones[ones]  #From dictionary find ones
     
-        dollar = " ".join((ten_in_words.capitalize(), one_in_words, "dollars"))  #prints the dollar amount
+        dollar = " ".join((ten_in_words, one_in_words, "dollars"))  #prints the dollar amount
         
       else:
-        dollar = " ".join((ten_in_words.capitalize(), "dollars"))
-        
-  elif num < 1000:    #number greater than 100
-    raw_hundred = int(num/100)
-    raw_number = num - (raw_hundred*100)
-    hundred = (_Ones[raw_hundred], "hundred")
-    dollar = " ".join(hundred)
+        dollar = " ".join((ten_in_words), "dollars")
+  
   else:
     dollar = " ".join((Fore.RED +"Not support yet"+Fore.WHITE))
 
+def three_d_convert(num):
+  global join_hundred
+  if num < 1000:    #number greater than 100
+    raw_hundred = int(num/100)
+    raw_number = num - (raw_hundred*100)
+    two_d_convert(raw_number)
+    
+    hundred = (_Ones[raw_hundred], "hundred")
+    join_hundred = " ".join([" ".join(hundred),"and", dollar])
 
 
 def convert(raw_num):
   num = round(float(raw_num), 2)
   if num.is_integer() == True:
-    two_d_convert(num)
-    print(dollar)
-    validation()
+    if num < 100:
+      two_d_convert(num)
+      print(dollar.capitalize())
+      validation()
+    elif num < 1000:
+      three_d_convert(num)
+      print(join_hundred.capitalize())
+      validation()
+    else:
+      print(Fore.RED +"Not support yet"+Fore.WHITE.capitalize())
+      validation()
+      
   else:                      #decimal number loop
     raw_cents, raw_dollars = math.modf(num)
     two_d_convert(raw_dollars), cents_convert(round(raw_cents*100, 0))
