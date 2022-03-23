@@ -43,13 +43,12 @@ error =("not supporting yet")
 
 #__________Function___________#
 def cents_convert(cent):
+  global cents
   if cent < 20:                      #validate if number fit requirement for   dictionary 1
       if cent == 1:
-        print(_Ones[cent].capitalize(), "cent")    #Print one dollar
-        validation()
+        cents = (_Ones[cent], "cent")    #Print one dollar
       else: 
-        print(_Ones[cent].capitalize(), "cents")    #This should able to convert number with in 1-19
-        validation()
+        cents = (_Ones[cent], "cents")    #This should able to convert number with in 1-19
   elif cent < 100:
       ten_cents, single_cents = [(cent//(10**i))%10 for i in range(math.ceil(math.log(cent, 10))-1,  -1, -1)]
      #Program from https://www.delftstack.com/howto/python/split-integer-into-digits-python/
@@ -58,23 +57,21 @@ def cents_convert(cent):
       if single_cents != 0:
         single_cents_in_words = _Ones[single_cents]  #From dictionary find single_cents
     
-        print(ten_cents_in_words.capitalize(), single_cents_in_words, "cents")  #prints the dollar amount
-        validation()
+        cents = (ten_cents_in_words, single_cents_in_words, "cents")  #prints the dollar amount
       else:
-        print(ten_cents_in_words.capitalize(), "cents")
-        validation()
+        cents = (ten_cents_in_words, "cents")
   else:    #number greater than 100
-      print(Fore.RED +"Not support yet"+Fore.WHITE)
-      validation()
+      cents = (Fore.RED +"There is an error"+Fore.WHITE)
 
 
 def two_d_convert(num):
+  global dollar
   if num < 20:                      #validate if number fit requirement for   dictionary 1
       if num == 1:
-        print(_Ones[num].capitalize(), "dollar")    #Print one dollar
+        dollar = (_Ones[num].capitalize(), "dollar")    #Print one dollar
         
       else: 
-        print(_Ones[num].capitalize(), "dollars")    #This should able to convert number with in 1-19
+        dollar = (_Ones[num].capitalize(), "dollars")    #This should able to convert number with in 1-19
         
   elif num < 100:
       tens, ones = [(num//(10**i))%10 for i in range(math.ceil(math.log(num, 10))-1,  -1, -1)]
@@ -84,13 +81,13 @@ def two_d_convert(num):
       if ones != 0:
         one_in_words = _Ones[ones]  #From dictionary find ones
     
-        print(ten_in_words.capitalize(), one_in_words, "dollars")  #prints the dollar amount
+        dollar = (ten_in_words.capitalize(), one_in_words, "dollars")  #prints the dollar amount
         
       else:
-        print(ten_in_words.capitalize(), "dollars")
+        dollar = (ten_in_words.capitalize(), "dollars")
         
   else:    #number greater than 100
-      print(Fore.RED +"Not support yet"+Fore.WHITE)
+      dollar = (Fore.RED +"Not support yet"+Fore.WHITE)
       
 
 
@@ -99,17 +96,17 @@ def convert(raw_num):
   num = round(float(raw_num), 2)
   if num.is_integer() == True:
     two_d_convert(num)
+    validation()
   else:                      #decimal number loop
-    cents, dollars = math.modf(num)
-    print("Cents:", round(cents, 2))
-    print("Dollars:", dollars)
-    two_d_convert(dollars)
-    cents_convert(round(cents, 2)*100)
+    raw_cents, raw_dollars = math.modf(num)
+    two_d_convert(raw_dollars), cents_convert(round(raw_cents*100, 0))
+    print(" ".join(dollar),"and", " ".join(cents))
+    validation()
     
   
   
 def validation():
-  num_input = input("\nPlease put in amount that you would like to convert:\n")    #This should print the code and lead   the user to type in a number
+  num_input = input("\nPlease put in amount that you would like to convert:\n$")    #This should print the code and lead   the user to type in a number
   try:
     is_num = float(num_input)
     
@@ -124,7 +121,8 @@ def validation():
     validation()
 
 #______MAIN_______#
-print("Welcome to the number to word converter.")
+print("Welcome to the number to word converter. This program is currently only support number up to 100")
+print("Copyright: © 2022 Forrest and Michael.")
 validation()
 
 
