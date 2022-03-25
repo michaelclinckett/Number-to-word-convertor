@@ -194,7 +194,7 @@ def validation():
     validation()
 
 #______MAIN_______#
-print("Welcome to the number to word converter. This program is currently only support number up to 100")
+print("Welcome to the number to word converter. This program is currently only support amount up to $999.99")
 print("Copyright: © 2022 Forrest and Michael.")
 validation()
 
