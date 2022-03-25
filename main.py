@@ -124,7 +124,7 @@ def two_d_convert(num):
         dollar = " ".join((ten_in_words, one_in_words, "dollars"))  #prints the dollar amount
         
       else:
-        dollar = " ".join((ten_in_words), "dollars")
+        dollar = " ".join((ten_in_words, "dollars"))
   
   else:
     dollar = " ".join((Fore.RED +"Not support yet"+Fore.WHITE))
