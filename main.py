@@ -2,81 +2,11 @@
 import math
 import colorama
 from colorama import Fore
+from data import _Ones, _Tens, _placeholders
 #_____________DEFINE___________#
 
 
-_Ones = {
-    1: 'one',
-    2: 'two',
-    3: 'three',
-    4: 'four',
-    5: 'five',
-    6: 'six',
-    7: 'seven',
-    8: 'eight',
-    9: 'nine',
-    10: 'ten',
-    11: 'eleven',
-    12: 'twelve',
-    13: 'thirteen',
-    14: 'fourteen',
-    15: 'fifteen',
-    16: 'sixteen',
-    17: 'seventeen',
-    18: 'eighteen',
-    19: 'nineteen',
-    0: 'zero'
-}
 
-_Tens = {
-    2: 'twenty',
-    3: 'thirty',
-    4: 'forty',
-    5: 'fifty',
-    6: 'sixty',
-    7: 'seventy',
-    8: 'eighty',
-    9: 'ninety'
-}
-
-_placeholders = {
-    0: ' ',
-    1: 'thousand',
-    2: 'million',
-    3: 'billion',
-    4: 'trillion',
-    5: 'quadrillion',
-    6: 'quintillion',
-    7: 'hextillion',
-    8: 'septillion',
-    9: 'octillion',
-    10: 'nonillion',
-    11: 'decillion',
-    12: 'undecillion',
-    13: 'duodecillion',
-    14: 'tredecillion',
-    15: 'quattuordecillion',
-    16: 'quindecillion',
-    17: 'hexdecillion',
-    18: 'septendecillion',
-    19: 'octodecillion',
-    20: 'novemdecillion',
-    21: 'vigintillion',
-    22: 'unvigintillion',
-    23: 'duovigintillion',
-    24: 'trevigintillion',
-    25: 'quattourvigintillion',
-    26: 'quinvigintillion',
-    27: 'hexvigintillion',
-    28: 'septenvigintillion',
-    29: 'octovigintillion',
-    30: 'novemvigintillion',
-    31: 'trigintillion',
-    32: 'untrigintillion',
-    33: 'duotrigintillion',
-    34: 'googol',
-    35: 'googolplex'
-}
 
 
 error =("not supporting yet")
@@ -131,16 +61,15 @@ def two_d_convert(num):
 
 def three_d_convert(num):
   global join_hundred
-  if num < 1000:    #number greater than 100
-    raw_hundred = int(num/100)
-    raw_number = num - (raw_hundred*100)
-    if raw_number != 0:
-      two_d_convert(raw_number)
-      hundred = (_Ones[raw_hundred], "hundred")
-      join_hundred = " ".join([" ".join(hundred),"and", dollar])
-    else:
-      hundred = (_Ones[raw_hundred], "hundred")
-      join_hundred =" ".join(hundred)
+  raw_hundred = int(num/100)
+  raw_number = num - (raw_hundred*100)
+  if raw_number != 0:
+    two_d_convert(raw_number)
+    hundred = (_Ones[raw_hundred], "hundred")
+    join_hundred = " ".join([" ".join(hundred),"and", dollar])
+  else:
+    hundred = (_Ones[raw_hundred], "hundred")
+    join_hundred =" ".join(hundred)
     
 
 
@@ -171,17 +100,27 @@ def convert(raw_num):
       print((join_hundred.capitalize()),"and", " ".join(cents))
       validation()
     
-    else:
+    elif number_of_digits < 7:
       print((Fore.RED +"Not support yet"+Fore.WHITE).capitalize())
       validation()
     
   
   
 def validation():
+  global number_of_digits
   global is_num
-  num_input = input("\nPlease put in amount that you would like to convert:\n$")    #This should print the code and lead   the user to type in a number
+  num_input = input("\nPlease put in a number amount that you would like to convert:\n$")    #This should print the code and lead   the user to type in a number
   try:
     is_num = float(num_input)
+    first_digit = is_num
+    number_of_digits = 1
+    while (first_digit >= 10):
+      first_digit = int(first_digit // 10)
+      number_of_digits += 1
+    last_three_numbers = int(abs(is_num) % 1000)
+    print(first_digit)
+    print(number_of_digits)
+    print(last_three_numbers)
     
   except ValueError:
     print(Fore.RED +"Please put in a VALID number"+Fore.WHITE)
