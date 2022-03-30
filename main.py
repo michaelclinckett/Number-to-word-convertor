@@ -50,7 +50,6 @@ def two_d_convert(num):
 
       if ones != 0:
         one_in_words = _Ones[ones]  #From dictionary find ones
-    
         dollar = " ".join((ten_in_words, one_in_words, "dollars"))  #prints the dollar amount
         
       else:
@@ -85,9 +84,28 @@ def convert(raw_num):
       print(join_hundred.capitalize())
       validation()
     else:      #larger than 1000 input
-      print(Fore.RED +"Not support yet"+Fore.WHITE.capitalize())
-      validation()
-      
+      number = "storage"
+      first = "storgae"
+      string = " "
+      loop_time = 0
+      while num > 100:
+        last_three_numbers = int(abs(num) % 1000)
+        num = num/1000
+        three_d_convert(last_three_numbers)
+        
+        number = join_hundred.rsplit(' ', 1)[0]+" "+_placeholders[loop_time]
+        
+        string = number + string 
+        loop_time += 1
+        
+      else: 
+        two_d_convert(int(num))
+        first = dollar.rsplit(' ', 1)[0]+" "+_placeholders[loop_time]
+        outcome = first + string
+        print(outcome)
+        
+  
+  
   else:                      #decimal number loop
     raw_cents, raw_dollars = math.modf(num)
     if num < 100:
@@ -100,27 +118,19 @@ def convert(raw_num):
       print((join_hundred.capitalize()),"and", " ".join(cents))
       validation()
     
-    elif number_of_digits < 7:
+    else:
       print((Fore.RED +"Not support yet"+Fore.WHITE).capitalize())
       validation()
     
   
   
 def validation():
-  global number_of_digits
   global is_num
   num_input = input("\nPlease put in a number amount that you would like to convert:\n$")    #This should print the code and lead   the user to type in a number
   try:
     is_num = float(num_input)
-    first_digit = is_num
-    number_of_digits = 1
-    while (first_digit >= 10):
-      first_digit = int(first_digit // 10)
-      number_of_digits += 1
-    last_three_numbers = int(abs(is_num) % 1000)
-    print(first_digit)
-    print(number_of_digits)
-    print(last_three_numbers)
+    
+    
     
   except ValueError:
     print(Fore.RED +"Please put in a VALID number"+Fore.WHITE)
