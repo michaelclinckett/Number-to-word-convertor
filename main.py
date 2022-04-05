@@ -18,8 +18,12 @@ def main():
 
 def validation():
   str = request_num()
-  if str[0] == ".":
-    str = "0"+str
+  try:
+    if str[0] == ".":
+      str = "0"+str
+  except IndexError:
+    print(Fore.RED +"Please put in something"+Fore.WHITE)
+    validation()
   try:                #try if input number
     float(str)
     
@@ -57,9 +61,12 @@ def convert(raw_num):
     else:
       num1 = int(raw_num) 
   except ValueError:
-    print(Fore.RED +"Please put in an input in number"+Fore.WHITE)
+    print(Fore.RED +"Please enter a number"+Fore.WHITE)
     validation()
 
+  if len(str(num1)) > 126:
+    print(Fore.RED + "Sorry, this number is larger than our dictionary" +Fore.WHITE)
+    validation()
   
   if num2 == "":
     if num1 < 100:    #checking to use 2_digit or 3_digit convert
