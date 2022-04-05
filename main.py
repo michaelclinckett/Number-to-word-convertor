@@ -87,7 +87,7 @@ def convert(raw_num):
   else:                      #decimal number loop
 
     if num1 == 0:
-      print(" ".join(cents_convert(num2)))
+      print(" ".join(cents_convert(num2)).capitalize())
     elif num1 < 100:
       two_output = two_d_convert(num1)
       if two_output == "one":        
