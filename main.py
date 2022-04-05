@@ -120,7 +120,7 @@ def two_d_convert(num):
         return " ".join((ten_in_words, one_in_words))  #prints the dollar amount
         
       else:
-        return " ".join((ten_in_words))
+        return (ten_in_words)
   
   else:
     return " ".join((Fore.RED +"Not support yet"+Fore.WHITE))
@@ -161,7 +161,7 @@ def three_d_convert(num):
       hundred = (_Ones[raw_hundred], "hundred")
       return " ".join(hundred)
   else:
-    return (two_d_convert(raw_number))
+    return " ".join(two_d_convert(raw_number))
 
     
 
